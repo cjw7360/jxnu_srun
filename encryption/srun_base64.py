@@ -20,13 +20,14 @@ def get_base64(s):
         x.append(_ALPHA[((b10 >> 6) & 63)]);
         x.append(_ALPHA[(b10 & 63)])
     i=imax
+
     if len(s) - imax ==1:
         b10 = _getbyte(s, i) << 16;
         x.append(_ALPHA[(b10 >> 18)] + _ALPHA[((b10 >> 12) & 63)] + _PADCHAR + _PADCHAR);
-    else:
+    elif len(s) - imax ==2:
         b10 = (_getbyte(s, i) << 16) | (_getbyte(s, i + 1) << 8);
         x.append(_ALPHA[(b10 >> 18)] + _ALPHA[((b10 >> 12) & 63)] + _ALPHA[((b10 >> 6) & 63)] + _PADCHAR);
     return "".join(x)
 if __name__ == '__main__':
-    r=get_base64("132456")
+    r=get_base64("123")
     print(r)
